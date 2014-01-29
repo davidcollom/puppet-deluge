@@ -1,7 +1,6 @@
 class deluge::logrotate{
 
   if defined('logrotate::rule') {
-
     logrotate::rule { 'deluge':
       path          => '/var/log/deluge/daemon.log',
       rotate        => 4,
@@ -13,6 +12,7 @@ class deluge::logrotate{
       compress      => true,
       postrotate    => "initctl restart ${deluged::service_name};";
     }
+
     if defined(Class['deluged::web'])
     {
       logrotate::rule { 'deluged::web::web_service_name':

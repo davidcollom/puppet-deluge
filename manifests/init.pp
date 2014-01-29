@@ -10,13 +10,11 @@ class deluge(
 
     package{$package_name:
       ensure => present;
-    }
-
+    }->
     group {$group:
       ensure => present,
       system => true;
-    }
-
+    }->
     user {$user:
       ensure     => present,
       home       => '/var/lib/deluge',
@@ -24,9 +22,7 @@ class deluge(
       system     => true,
       gid        => $group,
       require    => Group[$group];
-    }
-
-
+    }->
     file {
       "/etc/init/${service_name}.conf":
         ensure  => file,
@@ -39,12 +35,10 @@ class deluge(
         mode   => 0750,
         owner  => $user,
         group  => $group;
-    }
-
+    }~>
     service {$service_name:
       ensure    => running,
       provider  => upstart,
-      subscribe => File["/etc/init/${service_name}.conf"];
     }
 
 

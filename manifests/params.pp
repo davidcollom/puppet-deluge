@@ -7,4 +7,5 @@ class deluge::params {
   $service_name = 'deluged'
 
   $web_service_name = 'deluge-web'
+  $web_package_name = 'deluge-web'
 }
