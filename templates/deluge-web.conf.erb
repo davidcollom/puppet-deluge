@@ -12,8 +12,8 @@ stop on stopping deluged
 respawn
 respawn limit 5 30
 
-env uid=deluge
-env gid=deluge
+env uid=<%=@user%>
+env gid=<%=@group%>
 env umask=027
 
 exec start-stop-daemon -S -c $uid:$gid -k $umask -x /usr/bin/deluge-web -- -l /var/log/deluge/web.log -L warning
